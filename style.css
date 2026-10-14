@@ -209,39 +209,25 @@ header.site-nav {
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  background: radial-gradient(60% 55% at 78% 40%, rgba(255, 179, 0, .07), transparent 70%);
 }
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  will-change: transform;
-}
-.orb-a {
-  width: 520px; height: 520px;
-  top: -140px; right: -120px;
-  background: radial-gradient(circle, rgba(255, 179, 0, .22), transparent 65%);
-}
-.orb-b {
-  width: 420px; height: 420px;
-  bottom: -160px; left: -140px;
-  background: radial-gradient(circle, rgba(61, 220, 132, .12), transparent 65%);
-}
+/* Price line sits along the bottom edge, below the hero copy, fading in from the left */
 .hero-chart {
   position: absolute;
-  left: 0; right: 0; bottom: 8%;
+  left: 0; right: 0; bottom: 0;
   width: 100%;
-  height: 46%;
-  opacity: .5;
+  height: 18%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 45%, #000 100%);
 }
 .hero-chart-line {
   fill: none;
   stroke: var(--amber);
-  stroke-width: 1.5;
+  stroke-width: 1.25;
   vector-effect: non-scaling-stroke;
   stroke-dasharray: 2400;
   stroke-dashoffset: 0;
-  filter: drop-shadow(0 0 6px rgba(255, 179, 0, .6));
-  opacity: .55;
+  opacity: .35;
 }
 .js .hero-chart-line {
   stroke-dashoffset: 2400;
@@ -334,14 +320,12 @@ header.site-nav {
 .js:not(.-string) .hero h1 { opacity: 0; }
 .hero h1 .-s-char {
   display: inline-block;
-  opacity: 0;
-  transform: translateY(0.6em) rotate(6deg);
-  filter: blur(6px);
-  animation: char-in .9s var(--ease-out) forwards;
-  animation-delay: calc(0.15s + var(--char-index, 0) * 0.035s);
+  transform: translateY(110%);
+  animation: char-in 1s var(--ease-out) forwards;
+  animation-delay: calc(0.15s + var(--char-index, 0) * 0.025s);
 }
-.hero h1 em .-s-char { animation-delay: calc(0.6s + var(--char-index, 0) * 0.05s); }
-@keyframes char-in { to { opacity: 1; transform: none; filter: blur(0); } }
+.hero h1 em .-s-char { animation-delay: calc(0.45s + var(--char-index, 0) * 0.03s); }
+@keyframes char-in { to { transform: none; } }
 
 /* Scroll cue */
 .scroll-cue {
@@ -502,14 +486,14 @@ header.site-nav {
 .ticker-item .flat { color: var(--amber); }
 
 /* ---------------- Sections ---------------- */
-section { padding: 120px 0; position: relative; z-index: 1; }
+section { padding: 96px 0; position: relative; z-index: 1; }
 section + section { border-top: 1px solid var(--border-soft); }
 
 .section-head {
   display: flex;
   align-items: baseline;
   gap: 16px;
-  margin-bottom: 52px;
+  margin-bottom: 44px;
 }
 .section-num {
   font-family: var(--font-mono);
@@ -531,15 +515,23 @@ section + section { border-top: 1px solid var(--border-soft); }
 }
 
 /* Section heading reveal — triggered when StringTune adds .-inview */
-.-s-word { display: inline-block; white-space: nowrap; }
+/* Words act as masks: letters slide up from behind the word's lower edge.
+   Padding/negative margin keep descenders (j, g, p) and italics from being clipped. */
+.-s-word {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.06em 0.14em;
+  margin: 0 -0.06em -0.14em;
+}
 .section-head .-s-char {
   display: inline-block;
-  opacity: 0;
-  transform: translateY(0.5em);
-  transition: opacity .6s var(--ease-out), transform .8s var(--ease-out);
-  transition-delay: calc(var(--char-index, 0) * 0.025s);
+  transform: translateY(110%);
+  transition: transform .9s var(--ease-out);
+  transition-delay: calc(var(--char-index, 0) * 0.018s);
 }
-.section-head.-inview .-s-char { opacity: 1; transform: none; }
+.section-head.-inview .-s-char { transform: none; }
 .js .section-num { opacity: 0; transition: opacity .6s ease .1s; }
 .js .section-head.-inview .section-num { opacity: 1; }
 .js .section-line { transform: scaleX(0); transition: transform 1.4s var(--ease-out) .25s; }
@@ -548,9 +540,9 @@ section + section { border-top: 1px solid var(--border-soft); }
 /* Generic block reveal */
 .js .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity .9s var(--ease-out), transform 1.1s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 0.08s);
+  transform: translateY(18px);
+  transition: opacity .7s var(--ease-out), transform .9s var(--ease-out);
+  transition-delay: calc(min(var(--i, 0), 4) * 0.06s);
 }
 .js .reveal.-inview { opacity: 1; transform: none; }
 
