@@ -1,5 +1,6 @@
 // ---------------------------------------------------------------
 // Mohammed Ahmed Hejairi — Portfolio interactivity
+// Motion powered by StringTune (https://string-tune.fiddle.digital)
 // ---------------------------------------------------------------
 
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -17,6 +18,86 @@ navLinks.querySelectorAll('a').forEach(link => {
 
 // Respect reduced motion preference
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+// ---------------- StringTune: smooth scroll + effects ----------------
+let stringTune = null;
+
+if (!reduceMotion && window.StringTune) {
+  const ST = window.StringTune;
+  stringTune = ST.StringTune.getInstance();
+  stringTune.scrollDesktopMode = 'smooth';
+  stringTune.scrollMobileMode = 'default';
+  stringTune.speed = 0.1;
+
+  stringTune.use(ST.StringSplit);
+  stringTune.use(ST.StringProgress);
+  stringTune.use(ST.StringParallax);
+  if (finePointer) {
+    stringTune.use(ST.StringMagnetic);
+    stringTune.use(ST.StringTilt);
+  }
+  stringTune.start(60);
+} else {
+  // No motion: show everything immediately
+  document.documentElement.classList.remove('js');
+}
+
+// Stagger reveal delays among siblings in the same grid/list
+document.querySelectorAll('.reveal').forEach(el => {
+  const siblings = [...el.parentElement.children].filter(c => c.classList.contains('reveal'));
+  el.style.setProperty('--i', siblings.indexOf(el));
+});
+
+// Anchor links go through StringTune so they glide with smooth scroll
+const NAV_OFFSET = 62;
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const id = link.getAttribute('href');
+    const target = id === '#top' ? document.body : document.querySelector(id);
+    if (!target || !stringTune) return;
+    e.preventDefault();
+    const y = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    stringTune.scrollTo(Math.max(0, y));
+    history.replaceState(null, '', id);
+  });
+});
+
+// ---------------- Scroll progress bar + active nav link ----------------
+const progressBar = document.getElementById('scrollProgress');
+const navAnchors = [...navLinks.querySelectorAll('a')];
+const sections = navAnchors
+  .map(a => document.querySelector(a.getAttribute('href')))
+  .filter(Boolean);
+
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.setProperty('--p', max > 0 ? window.scrollY / max : 0);
+
+    const mark = window.scrollY + window.innerHeight * 0.35;
+    let current = null;
+    sections.forEach(sec => { if (sec.offsetTop <= mark) current = sec.id; });
+    navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    ticking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// ---------------- Pointer-follow glow on cards ----------------
+if (finePointer) {
+  document.querySelectorAll('.glow').forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+}
 
 // ---------------- Terminal typing effect ----------------
 const terminalLines = [
@@ -83,7 +164,8 @@ function typeTerminal() {
 if (reduceMotion) {
   renderStatic();
 } else {
-  typeTerminal();
+  // wait for the hero intro to settle before typing
+  setTimeout(typeTerminal, 700);
 }
 
 // ---------------- Ticker tape ----------------
@@ -104,19 +186,37 @@ function buildTicker() {
 }
 buildTicker();
 
-// ---------------- Animate impact bars on scroll ----------------
+// ---------------- In-view triggers: impact bars + stat counters ----------------
+function countUp(el) {
+  const target = Number(el.dataset.count);
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const duration = 1600;
+  const start = performance.now();
+  function frame(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 4);
+    el.textContent = prefix + Math.round(target * eased).toLocaleString('en-US') + suffix;
+    if (t < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
 const bars = document.querySelectorAll('.impact-bar-fill');
-if ('IntersectionObserver' in window) {
+const counters = document.querySelectorAll('[data-count]');
+
+if ('IntersectionObserver' in window && !reduceMotion) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const bar = entry.target;
-        bar.style.width = bar.dataset.w + '%';
-        observer.unobserve(bar);
-      }
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (el.dataset.w) el.style.width = el.dataset.w + '%';
+      if (el.dataset.count) countUp(el);
+      observer.unobserve(el);
     });
   }, { threshold: 0.4 });
   bars.forEach(bar => observer.observe(bar));
+  counters.forEach(c => observer.observe(c));
 } else {
   bars.forEach(bar => bar.style.width = bar.dataset.w + '%');
 }

@@ -6,12 +6,24 @@
 <title>Mohammed Ahmed Hejairi — Quantitative Researcher</title>
 <meta name="description" content="Portfolio of Mohammed Ahmed Hejairi — aspiring quantitative researcher and financial data scientist. Econometrics, machine learning, and investment analytics.">
 
+<!-- Enable motion styles only when JS runs; fall back to fully visible content if StringTune never starts -->
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function () {
+    if (!document.documentElement.classList.contains('-string')) {
+      document.documentElement.classList.remove('js');
+    }
+  }, 3000);
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
 <header class="site-nav">
   <div class="wrap nav-inner">
@@ -34,33 +46,50 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="orb orb-a" string="parallax" string-parallax="-0.25"></div>
+      <div class="orb orb-b" string="parallax" string-parallax="0.3"></div>
+      <svg class="hero-chart" viewBox="0 0 1200 300" preserveAspectRatio="none" string="parallax" string-parallax="0.15">
+        <path class="hero-chart-line" d="M0 240 L60 228 L120 236 L180 210 L240 218 L300 190 L360 200 L420 168 L480 178 L540 150 L600 162 L660 128 L720 140 L780 110 L840 122 L900 92 L960 104 L1020 70 L1080 84 L1140 52 L1200 40" />
+      </svg>
+    </div>
+
     <div class="wrap hero-grid">
-      <div>
-        <div class="hero-eyebrow">ANALYST PROFILE · BAHRAIN</div>
-        <h1>Mohammed Ahmed<br><em>Hejairi</em></h1>
-        <p class="subtitle">Aspiring quantitative researcher and financial data scientist — turning econometrics and machine learning into investment insight.</p>
-        <div class="hero-meta">
+      <div class="hero-copy">
+        <div class="hero-eyebrow intro" style="--d:0">ANALYST PROFILE · BAHRAIN</div>
+        <h1 aria-label="Mohammed Ahmed Hejairi">
+          <span class="h1-line" string="split" string-split="word|char">Mohammed Ahmed</span>
+          <em class="h1-line" string="split" string-split="word|char">Hejairi</em>
+        </h1>
+        <p class="subtitle intro" style="--d:1">Aspiring quantitative researcher and financial data scientist — turning econometrics and machine learning into investment insight.</p>
+        <div class="hero-meta intro" style="--d:2">
           <span>📍 Buri, Bahrain</span>
           <span>✉ mhejairi2007@gmail.com</span>
           <span>☎ +973 3636 9943</span>
         </div>
-        <div class="cta-row">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-ghost">Get In Touch</a>
-          <a href="https://linkedin.com/in/mohammedhujairi" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+        <div class="cta-row intro" style="--d:3">
+          <a href="#projects" class="btn btn-primary" string="magnetic" string-strength="0.25" string-radius="120"><span>View Projects</span></a>
+          <a href="#contact" class="btn btn-ghost" string="magnetic" string-strength="0.25" string-radius="120"><span>Get In Touch</span></a>
+          <a href="https://linkedin.com/in/mohammedhujairi" target="_blank" rel="noopener" class="btn btn-ghost" string="magnetic" string-strength="0.25" string-radius="120"><span>LinkedIn ↗</span></a>
         </div>
       </div>
 
-      <div class="terminal" aria-hidden="false">
-        <div class="terminal-bar">
-          <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
-          <span class="terminal-title">zsh — analyst_profile</span>
-        </div>
-        <div class="terminal-body" id="terminalBody">
-          <div class="terminal-line"><span class="prompt">&gt;</span> <span class="path">./load_profile.py</span></div>
+      <div class="terminal-wrap intro" style="--d:2">
+        <div class="terminal" string="tilt" string-tilt-max="6">
+          <div class="terminal-bar">
+            <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+            <span class="terminal-title">zsh — analyst_profile</span>
+          </div>
+          <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line"><span class="prompt">&gt;</span> <span class="path">./load_profile.py</span></div>
+          </div>
         </div>
       </div>
     </div>
+
+    <a href="#about" class="scroll-cue mono intro" style="--d:4" aria-label="Scroll to profile">
+      <span>SCROLL</span><span class="scroll-cue-line"></span>
+    </a>
   </section>
 
   <!-- TICKER -->
@@ -71,28 +100,28 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" string>
         <span class="section-num mono">§ 01</span>
-        <h2>Profile</h2>
+        <h2 string="split" string-split="word|char">Profile</h2>
         <span class="section-line"></span>
       </div>
       <div class="about-grid">
-        <div class="about-bio">
+        <div class="about-bio reveal" string>
           <p>An aspiring quantitative analyst pursuing a <strong>B.Sc. in Data Science and Business Analytics</strong> through the Bahrain Institute of Banking and Finance, UOL, and LSE, with a strong grounding in econometrics, statistical modeling, and applied machine learning for financial decision-making — reinforced through active membership in the BIBF Quant Society.</p>
           <p>Built and validated a real estate valuation model using <strong>XGBoost and SHAP analysis</strong> that engineered core investment metrics (cap rate, NPV, cash-on-cash return) and increased pricing accuracy by <strong>70%</strong>, demonstrating the ability to translate quantitative models into investment insight.</p>
           <p>Founded <strong>Bayanati</strong>, a secure data-exchange startup supported by Tamkeen, reflecting strength in data infrastructure and rigorous, structured problem-solving. Now targeting quantitative research and financial analyst roles at firms such as JP Morgan, Jane Street, BlackRock, Citadel, and Blackstone.</p>
         </div>
-        <div class="stat-block">
-          <div class="stat">
-            <div class="num">+70%</div>
+        <div class="stat-block" string="parallax" string-parallax="-0.06">
+          <div class="stat glow reveal" string>
+            <div class="num" data-count="70" data-prefix="+" data-suffix="%">+70%</div>
             <div class="label">Valuation Accuracy Improvement</div>
           </div>
-          <div class="stat">
-            <div class="num">1,000</div>
+          <div class="stat glow reveal" string>
+            <div class="num" data-count="1000">1,000</div>
             <div class="label">Participant Data Points Analyzed</div>
           </div>
-          <div class="stat">
-            <div class="num">−90%</div>
+          <div class="stat glow reveal" string>
+            <div class="num" data-count="90" data-prefix="−" data-suffix="%">−90%</div>
             <div class="label">Issue Resolution Time (invo POS)</div>
           </div>
         </div>
@@ -103,13 +132,13 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" string>
         <span class="section-num mono">§ 02</span>
-        <h2>Skills</h2>
+        <h2 string="split" string-split="word|char">Skills</h2>
         <span class="section-line"></span>
       </div>
       <div class="skills-grid">
-        <div class="skill-card">
+        <div class="skill-card glow reveal" string>
           <h3>Quantitative &amp; Statistical</h3>
           <div class="tag-row">
             <span class="tag">Econometrics</span>
@@ -118,7 +147,7 @@
             <span class="tag">Predictive Modeling</span>
           </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glow reveal" string>
           <h3>Financial Modeling</h3>
           <div class="tag-row">
             <span class="tag">Cap Rate</span>
@@ -127,7 +156,7 @@
             <span class="tag">Investment Scoring</span>
           </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glow reveal" string>
           <h3>Machine Learning</h3>
           <div class="tag-row">
             <span class="tag">XGBoost</span>
@@ -136,7 +165,7 @@
             <span class="tag">SHAP Analysis</span>
           </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glow reveal" string>
           <h3>Programming</h3>
           <div class="tag-row">
             <span class="tag">Python</span>
@@ -146,7 +175,7 @@
             <span class="tag">Java</span>
           </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glow reveal" string>
           <h3>Visualization &amp; BI</h3>
           <div class="tag-row">
             <span class="tag">Tableau</span>
@@ -155,7 +184,7 @@
             <span class="tag">Excel</span>
           </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glow reveal" string>
           <h3>Languages</h3>
           <div class="tag-row">
             <span class="tag">Arabic</span>
@@ -169,13 +198,14 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" string>
         <span class="section-num mono">§ 03</span>
-        <h2>Quantitative Finance Projects</h2>
+        <h2 string="split" string-split="word|char">Quantitative Finance Projects</h2>
         <span class="section-line"></span>
       </div>
 
-      <div class="project">
+      <div class="project glow reveal" string>
+        <span class="project-index mono">01</span>
         <div class="project-head">
           <div>
             <h3>Real Estate Investment Analytics &amp; ML Valuation Model</h3>
@@ -193,7 +223,8 @@
         </div>
       </div>
 
-      <div class="project">
+      <div class="project glow reveal" string>
+        <span class="project-index mono">02</span>
         <div class="project-head">
           <div>
             <h3>Bayanati — Secure Data Infrastructure</h3>
@@ -208,41 +239,44 @@
   <!-- GA BOOTCAMP PROJECTS -->
   <section id="ga-projects">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" string>
         <span class="section-num mono">§ 04</span>
-        <h2>General Assembly Bootcamp Projects</h2>
+        <h2 string="split" string-split="word|char">General Assembly Bootcamp Projects</h2>
         <span class="section-line"></span>
       </div>
 
-      <div class="project">
+      <div class="project glow reveal" string>
+        <span class="project-index mono">01</span>
         <div class="project-head">
           <div>
             <h3>Bitcoin Volatility Prediction</h3>
             <div class="project-sub mono">PYTHON · XGBOOST · GARCH · TIME SERIES</div>
           </div>
-          <a href="https://github.com/mhejairi10/bitcoin-volatility-prediction" target="_blank" rel="noopener" class="btn btn-ghost">View Code ↗</a>
+          <a href="https://github.com/mhejairi10/bitcoin-volatility-prediction" target="_blank" rel="noopener" class="btn btn-ghost" string="magnetic" string-strength="0.2" string-radius="100"><span>View Code ↗</span></a>
         </div>
         <p class="project-desc">Capstone project: built and validated 7+ time-series models (GARCH, EWMA, HAR-RV-X, XGBoost, ARIMA family) on 79,000+ hourly BTC/USDT records to forecast 48-hour-ahead volatility. Engineered ATR, multi-horizon realized-volatility, and chi-square-validated calendar features on a leak-free, chronologically split pipeline, reducing forecast error (RMSE) by 49% versus the industry-standard GARCH baseline.</p>
       </div>
 
-      <div class="project">
+      <div class="project glow reveal" string>
+        <span class="project-index mono">02</span>
         <div class="project-head">
           <div>
             <h3>Hollow Growth: World Development EDA</h3>
             <div class="project-sub mono">PYTHON · PANDAS · EXPLORATORY DATA ANALYSIS</div>
           </div>
-          <a href="https://github.com/mhejairi10/Project-2-World-Development" target="_blank" rel="noopener" class="btn btn-ghost">View Code ↗</a>
+          <a href="https://github.com/mhejairi10/Project-2-World-Development" target="_blank" rel="noopener" class="btn btn-ghost" string="magnetic" string-strength="0.2" string-radius="100"><span>View Code ↗</span></a>
         </div>
         <p class="project-desc">Analyzed Gapminder population, GNI per capita, and life expectancy data across nearly 200 countries (1960–2020) to flag "hollow growth" countries — strong income growth without matching health gains — for a simulated $100M policy intervention fund. Engineered CAGR and life-expectancy-change metrics and built a median-split flagging system to shortlist candidate countries.</p>
       </div>
 
-      <div class="project">
+      <div class="project glow reveal" string>
+        <span class="project-index mono">03</span>
         <div class="project-head">
           <div>
             <h3>Recipe Manager (CLI App)</h3>
             <div class="project-sub mono">PYTHON · PANDAS · CSV PERSISTENCE</div>
           </div>
-          <a href="https://github.com/mhejairi10/recipe-manager" target="_blank" rel="noopener" class="btn btn-ghost">View Code ↗</a>
+          <a href="https://github.com/mhejairi10/recipe-manager" target="_blank" rel="noopener" class="btn btn-ghost" string="magnetic" string-strength="0.2" string-radius="100"><span>View Code ↗</span></a>
         </div>
         <p class="project-desc">Team-led (Python Fundamentals project) command-line recipe manager supporting adding, searching, and rating recipes, shopping-list generation, and serving-size scaling, with persistent CSV storage via Pandas — built to reinforce core Python: functions, file handling, and modular program design.</p>
       </div>
@@ -252,25 +286,25 @@
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" string>
         <span class="section-num mono">§ 05</span>
-        <h2>Experience</h2>
+        <h2 string="split" string-split="word|char">Experience</h2>
         <span class="section-line"></span>
       </div>
-      <div class="timeline">
-        <div class="tl-item">
+      <div class="timeline" string="progress" string-exit-el="bottom" string-exit-vp="bottom">
+        <div class="tl-item reveal" string>
           <div class="tl-date mono">JUL 2025 — SEP 2025</div>
           <h3>Business Analyst Intern</h3>
           <div class="tl-org">invo POS Technologies, Bahrain</div>
           <p>Accelerated issue resolution speed by 90% by streamlining client communication workflows and systematically documenting requests for programmers.</p>
         </div>
-        <div class="tl-item">
+        <div class="tl-item reveal" string>
           <div class="tl-date mono">MAY 2024 — JUN 2024</div>
           <h3>PR Intern</h3>
           <div class="tl-org">Labour Market Regulatory Authority, Bahrain</div>
           <p>Monitored and compiled news outlets, articles, and social media coverage of events related to the LMRA to support communications reporting.</p>
         </div>
-        <div class="tl-item">
+        <div class="tl-item reveal" string>
           <div class="tl-date mono">JUL 2025 — AUG 2025</div>
           <h3>Data Analyst (Volunteer)</h3>
           <div class="tl-org">Youth City 2025, Bahrain</div>
@@ -283,33 +317,33 @@
   <!-- EDUCATION -->
   <section id="education">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" string>
         <span class="section-num mono">§ 06</span>
-        <h2>Education &amp; Recognition</h2>
+        <h2 string="split" string-split="word|char">Education &amp; Recognition</h2>
         <span class="section-line"></span>
       </div>
       <div class="card-grid">
-        <div class="info-card">
+        <div class="info-card glow reveal" string>
           <h3>B.Sc. Data Science &amp; Business Analytics</h3>
           <div class="sub mono">BIBF · UOL · LSE — SEP 2024 – JAN 2027 (IN PROGRESS)</div>
           <p>Full Ride Scholarship, Bahrain Institute of Banking and Finance. Active member, BIBF Quant Society.</p>
         </div>
-        <div class="info-card">
+        <div class="info-card glow reveal" string>
           <h3>Data Science Immersive</h3>
           <div class="sub mono">GENERAL ASSEMBLY — JUN 2026 – SEP 2026</div>
           <p>Full-time intensive program covering statistics, machine learning, and time-series forecasting; capstone project forecasted Bitcoin volatility using GARCH, HAR-RV-X, and XGBoost.</p>
         </div>
-        <div class="info-card">
+        <div class="info-card glow reveal" string>
           <h3>International Baccalaureate Diploma</h3>
           <div class="sub mono">ARABIAN PEARL GULF SCHOOL — SEP 2015 – JUN 2024</div>
           <p>Bahrain.</p>
         </div>
-        <div class="info-card">
+        <div class="info-card glow reveal" string>
           <span class="badge">AWARD</span>
           <h3>First Bahraini Esports Player</h3>
           <div class="sub mono">FIFAE WORLD CUP — 2025</div>
         </div>
-        <div class="info-card">
+        <div class="info-card glow reveal" string>
           <span class="badge">AWARD</span>
           <h3>First Place, Robotics Olympiad</h3>
           <div class="sub mono">BAHRAIN — 2023</div>
@@ -321,19 +355,21 @@
   <!-- CONTACT -->
   <footer id="contact">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head" string>
         <span class="section-num mono">§ 07</span>
-        <h2>Get In Touch</h2>
+        <h2 string="split" string-split="word|char">Get In Touch</h2>
         <span class="section-line"></span>
       </div>
-      <p class="lead">Open to quantitative research, financial analyst, and data science opportunities. Reach out directly or connect on LinkedIn.</p>
-      <div class="contact-links">
-        <a href="mailto:mhejairi2007@gmail.com" class="btn btn-primary">Email Me</a>
-        <a href="https://linkedin.com/in/mohammedhujairi" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
-        <a href="tel:+97336369943" class="btn btn-ghost">+973 3636 9943</a>
+      <p class="contact-big" string="parallax" string-parallax="-0.08">Let's <em>talk</em>.</p>
+      <p class="lead reveal" string>Open to quantitative research, financial analyst, and data science opportunities. Reach out directly or connect on LinkedIn.</p>
+      <div class="contact-links reveal" string>
+        <a href="mailto:mhejairi2007@gmail.com" class="btn btn-primary" string="magnetic" string-strength="0.3" string-radius="140"><span>Email Me</span></a>
+        <a href="https://linkedin.com/in/mohammedhujairi" target="_blank" rel="noopener" class="btn btn-ghost" string="magnetic" string-strength="0.3" string-radius="140"><span>LinkedIn ↗</span></a>
+        <a href="tel:+97336369943" class="btn btn-ghost" string="magnetic" string-strength="0.3" string-radius="140"><span>+973 3636 9943</span></a>
       </div>
       <div class="foot-bottom">
         <span>© <span id="year"></span> Mohammed Ahmed Hejairi. Built on GitHub Pages.</span>
+        <a href="#top" class="to-top">Back to top ↑</a>
         <span>Buri, Bahrain</span>
       </div>
     </div>
@@ -341,6 +377,7 @@
 
 </main>
 
+<script src="https://unpkg.com/@fiddle-digital/string-tune@1.2.7/dist/index.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
